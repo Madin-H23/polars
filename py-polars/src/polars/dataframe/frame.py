@@ -4613,10 +4613,9 @@ class DataFrame:
                         # the existing table; some drivers (e.g. MySQL) otherwise
                         # write swapped values when the orders differ.
                         # Ref: https://github.com/pola-rs/polars/issues/29724
-                        if (
-                            list(table_schema.names) != self.columns
-                            and set(table_schema.names) == set(self.columns)
-                        ):
+                        if list(table_schema.names) != self.columns and set(
+                            table_schema.names
+                        ) == set(self.columns):
                             df_to_write = self.select(table_schema.names)
 
                 # For Snowflake, we convert to PyArrow until string_view columns can be
